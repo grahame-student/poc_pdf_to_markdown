@@ -39,10 +39,15 @@ jobs:
        run: | 
          pip install -r requirements.txt
 
+     - name: Split pdf into segments
+       run: |
+         mkdir -p segments
+         python scripts/split_pdf_by_bookmarks.py input/msp430_user_guide.pdf segments
+
      - name: Convert PDF to markdown
        run: |
          mkdir -p output
-         marker_single input/msp430_user_guide.pdf --output_format markdown --output_dir output
+         marker segments --output_format markdown --output_dir output
 
      - name: Upload converted files
        uses: actions/upload-artifact@v4.6.2

@@ -1,1 +1,2 @@
 marker-pdf==1.6.1
+pypdf==5.4.0
