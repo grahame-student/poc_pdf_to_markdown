@@ -47,7 +47,7 @@ jobs:
      - name: Convert PDF to markdown
        run: |
          mkdir -p output
-         marker segments --output_format markdown --output_dir output
+         marker segments --output_format markdown --output_dir output --workers 1
 
      - name: Upload converted files
        uses: actions/upload-artifact@v4.6.2
