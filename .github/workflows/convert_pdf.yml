@@ -37,7 +37,7 @@ jobs:
 
      - name: Install packages
        run: | 
-         pip install marker-pdf
+         pip install -r requirements.txt
 
      - name: Convert PDF to markdown
        run: |
