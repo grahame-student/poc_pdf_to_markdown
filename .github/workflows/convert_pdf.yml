@@ -51,7 +51,7 @@ jobs:
      - name: Split pdf into segments
        run: |
          mkdir -p segments
-         python scripts/split_pdf_by_bookmarks.py "input/${{ matrix.pdf-inputs.name }}.pdf segments"
+         python scripts/split_pdf_by_bookmarks.py "input/${{ matrix.pdf-inputs.name }}.pdf" segments
 
      - name: Convert PDF to markdown
        run: |
