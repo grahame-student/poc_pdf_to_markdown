@@ -13,6 +13,15 @@ permissions: {}
 
 jobs:
   convert-pdf:
+    strategy:
+      fail-fast: false
+      matrix:
+        pdf-inputs:
+          - name: msp_flasher_manual
+          - name: msp430_assembly_language_tools_v21.6.0.lts_users_guide
+          - name: msp430_embedded_application_binary_interface
+          - name: msp430_optimising_c_c++_compiler_v21.6.0.lts-users_guide
+          - name: msp430fr2355_datasheet
     permissions:
       contents: read # To enable linting of files in repo
       statuses: write # To report GitHub Actions status checks      
@@ -42,7 +51,7 @@ jobs:
      - name: Split pdf into segments
        run: |
          mkdir -p segments
-         python scripts/split_pdf_by_bookmarks.py input/msp430_user_guide.pdf segments
+         python scripts/split_pdf_by_bookmarks.py "input/${{ matrix.pdf-inputs.name }}.pdf segments"
 
      - name: Convert PDF to markdown
        run: |
@@ -52,5 +61,5 @@ jobs:
      - name: Upload converted files
        uses: actions/upload-artifact@v4.6.2
        with:
-         name: converted-markdown
+         name: "converted-markdown-${{ matrix.pdf-inputs.name }}"
          path: output
